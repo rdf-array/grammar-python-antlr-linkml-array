@@ -1,3 +1,20 @@
+<img src=".github/rdf-array-logo.png" alt="[PyShExC]" width="96" align="right">
+
+# grammar-python-antlr-linkml-array: PyShExC for RDF-
+
+**RDF-** fork of [grammar-python-antlr-linkml](https://github.com/ericprud/grammar-python-antlr-linkml)
+(the `pyshexc` ShExC parser, from its `extends-shaperef` branch): ShEx-'s **Collection** shape
+expression `((shapeExpr))[min, max]` parses to a
+[ShExJSG-array](https://github.com/rdf-array/ShExJSG-array) `Collection` object and `pyshexc.ShExC`
+writes it back. The grammar now lives in this repository as `grammar/ShExDoc.g4` (the spec's
+grammar plus `shapeAtomCollection`, `inlineShapeAtomCollection` and `collectionBounds`; `((x))` is
+always a Collection, `(x)` a parenthesised shape expression) and `scripts/genpython.sh` regenerates
+`pyshexc/parser/` from it with ANTLR 4.9.3, the version of the pinned Python runtime.
+[PyShEx-array](https://github.com/rdf-array/PyShEx-array) is the validator; its doc/rdf-array.md
+describes RDF- and lists the sibling forks.
+
+---
+
 This repository was originally developed by Eric Prud'hommeaux (@ericprud). All credit goes to him and other original developers. The reason for creating a detached fork ([original repo](https://github.com/shexSpec/grammar-python-antlr)) in the LinkML organization was to be able to support Python 3.14 in LinkML and to put the project in an organization that would allow for sustainability through community exposure as the library did not receive updates in the last years. Efforts to get in touch with the original developers sadly was not successful.
 
 # PyShExC - The Python ShExC Parser

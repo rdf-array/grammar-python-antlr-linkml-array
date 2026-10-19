@@ -3,7 +3,7 @@ from pyshexc.parser.ShExDocVisitor import ShExDocVisitor
 
 from pyshexc.parser_impl.parser_context import ParserContext
 from pyshexc.parser_impl.shex_node_expression_parser import ShexNodeExpressionParser
-from ShExJSG.ShExJ import BNODE, IRIREF, ShapeOr, ShapeAnd, ShapeNot, Shape, shapeExpr
+from ShExJSG.ShExJ import BNODE, IRIREF, ShapeOr, ShapeAnd, ShapeNot, Shape, shapeExpr, Collection
 
 
 class ShexShapeExpressionParser(ShExDocVisitor):
@@ -158,6 +158,37 @@ class ShexShapeExpressionParser(ShExDocVisitor):
     def visitInlineShapeAtomShapeOrRef(self, ctx: ShExDocParser.InlineShapeAtomShapeOrRefContext):
         """ inlineShapeAtom : inlineShapeOrRef inlineNonLitNodeConstraint? # inlineShapeAtomShapeOrRef """
         self._shape_atom(ctx, True, False)
+
+    # ------------------
+    # Collection (RDF-): ((shapeExpr))[min, max]
+    # ------------------
+    def _collection(self, ctx: ShExDocParser.ShapeAtomCollectionContext | ShExDocParser.InlineShapeAtomCollectionContext,
+                    is_inline: bool) -> None:
+        """ '(' '(' shapeExpression ')' ')' collectionBounds? -- a sequence of min to max elements, each
+            conforming to shapeExpression.  [m] is exactly m elements, [m, n] from m to n, [m, *] or [m,]
+            at least m; without bounds, any length.  max -1 is unbounded, as in TripleConstraint. """
+        inner = ShexShapeExpressionParser(self.context)
+        inner.visit(ctx.shapeExpression())
+        coll = Collection(id=None if is_inline else self.label, shapeExpr=inner.expr)
+        bounds = ctx.collectionBounds()
+        if bounds is not None:
+            ints = [int(t.getText()) for t in bounds.INTEGER()]
+            coll.min = ints[0]
+            if len(ints) == 2:
+                coll.max = ints[1]
+            elif ',' in bounds.getText():
+                coll.max = -1
+            else:
+                coll.max = ints[0]
+        self.expr = coll
+
+    def visitShapeAtomCollection(self, ctx: ShExDocParser.ShapeAtomCollectionContext):
+        """ shapeAtom : '(' '(' shapeExpression ')' ')' collectionBounds?   # shapeAtomCollection """
+        self._collection(ctx, False)
+
+    def visitInlineShapeAtomCollection(self, ctx: ShExDocParser.InlineShapeAtomCollectionContext):
+        """ inlineShapeAtom : '(' '(' shapeExpression ')' ')' collectionBounds?   # inlineShapeAtomCollection """
+        self._collection(ctx, True)
 
     # ------------------
     # shapeOrRef

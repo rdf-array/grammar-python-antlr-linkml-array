@@ -1,4 +1,4 @@
-# Generated from ShExDoc.g4 by ANTLR 4.9.3
+# Generated from grammar/ShExDoc.g4 by ANTLR 4.9.3
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .ShExDocParser import ShExDocParser
@@ -114,6 +114,11 @@ class ShExDocVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ShExDocParser#shapeAtomCollection.
+    def visitShapeAtomCollection(self, ctx:ShExDocParser.ShapeAtomCollectionContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by ShExDocParser#shapeAtomShapeExpression.
     def visitShapeAtomShapeExpression(self, ctx:ShExDocParser.ShapeAtomShapeExpressionContext):
         return self.visitChildren(ctx)
@@ -139,6 +144,11 @@ class ShExDocVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ShExDocParser#inlineShapeAtomCollection.
+    def visitInlineShapeAtomCollection(self, ctx:ShExDocParser.InlineShapeAtomCollectionContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by ShExDocParser#inlineShapeAtomShapeExpression.
     def visitInlineShapeAtomShapeExpression(self, ctx:ShExDocParser.InlineShapeAtomShapeExpressionContext):
         return self.visitChildren(ctx)
@@ -146,6 +156,11 @@ class ShExDocVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by ShExDocParser#inlineShapeAtomAny.
     def visitInlineShapeAtomAny(self, ctx:ShExDocParser.InlineShapeAtomAnyContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ShExDocParser#collectionBounds.
+    def visitCollectionBounds(self, ctx:ShExDocParser.CollectionBoundsContext):
         return self.visitChildren(ctx)
 
 
