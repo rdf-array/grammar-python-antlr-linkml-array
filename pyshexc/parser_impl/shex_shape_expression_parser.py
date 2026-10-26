@@ -169,7 +169,9 @@ class ShexShapeExpressionParser(ShExDocVisitor):
             at least m; without bounds, any length.  max -1 is unbounded, as in TripleConstraint. """
         inner = ShexShapeExpressionParser(self.context)
         inner.visit(ctx.shapeExpression())
-        coll = Collection(id=None if is_inline else self.label, shapeExpr=inner.expr)
+        # `((.))`: `.` sets no expression, and in ShExJ it is the empty shape, {"type": "Shape"}
+        coll = Collection(id=None if is_inline else self.label,
+                          shapeExpr=inner.expr if inner.expr is not None else Shape())
         bounds = ctx.collectionBounds()
         if bounds is not None:
             ints = [int(t.getText()) for t in bounds.INTEGER()]

@@ -89,3 +89,9 @@ def test_round_trips_through_the_writer():
         again = parse(written, BASE)
         assert again is not None, f"{text}\n  -> {written}"
         assert as_dict(again) == as_dict(once), f"{text}\n  -> {written}"
+
+
+def test_dot_is_the_empty_shape():
+    """ `((.))`: as in ShExJ, `.` is {"type": "Shape"}, so any element conforms """
+    assert as_dict(shape_expr_of("<S> ((.))")) == as_dict(collection(ShExJ.Shape()))
+    assert as_dict(shape_expr_of("<S> ((.))[0, *]")) == as_dict(collection(ShExJ.Shape(), min=0, max=-1))
