@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Regenerate pyshexc/parser/ from grammar/ShExDoc.g4.
 #
-# RDF-: the ShEx- grammar (the spec's ShExDoc.g4 plus the Collection shape expression
+# rdf-array: the ShEx-array grammar (the spec's ShExDoc.g4 plus the Collection shape expression
 # `((shapeExpr))[min, max]`) lives in this repository; upstream copied it from a sibling
 # checkout of shexSpec/grammar. The generated parser must match the Python runtime this
 # package pins (antlr4-python3-runtime ~= 4.9.3), so run the ANTLR 4.9.3 tool:

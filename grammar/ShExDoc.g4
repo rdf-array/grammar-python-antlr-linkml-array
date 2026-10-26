@@ -56,18 +56,18 @@ inlineShapeNot  : KW_NOT? inlineShapeAtom ;
 shapeAtom		: nonLitNodeConstraint shapeOrRef?    # shapeAtomNonLitNodeConstraint
                 | litNodeConstraint             # shapeAtomLitNodeConstraint
 				| shapeOrRef nonLitNodeConstraint?    # shapeAtomShapeOrRef
-				| '(' '(' shapeExpression ')' ')' collectionBounds?	# shapeAtomCollection	// RDF-: a sequence of elements
+				| '(' '(' shapeExpression ')' ')' collectionBounds?	# shapeAtomCollection	// rdf-array: a sequence of elements
 				| '(' shapeExpression ')'		# shapeAtomShapeExpression
 				| '.'							# shapeAtomAny			// no constraint
 				;
 inlineShapeAtom : inlineNonLitNodeConstraint inlineShapeOrRef? # inlineShapeAtomNonLitNodeConstraint
                 | inlineLitNodeConstraint             # inlineShapeAtomLitNodeConstraint
 				| inlineShapeOrRef inlineNonLitNodeConstraint? # inlineShapeAtomShapeOrRef
-				| '(' '(' shapeExpression ')' ')' collectionBounds?	# inlineShapeAtomCollection	// RDF-
+				| '(' '(' shapeExpression ')' ')' collectionBounds?	# inlineShapeAtomCollection	// rdf-array
 				| '(' shapeExpression ')'		# inlineShapeAtomShapeExpression
 				| '.'							# inlineShapeAtomAny   // no constraint
 				;
-// RDF-: the bounds of a Collection, ((shapeExpr))[min, max]: [m] exactly m elements,
+// rdf-array: the bounds of a Collection, ((shapeExpr))[min, max]: [m] exactly m elements,
 // [m, n] from m to n, [m, *] or [m,] at least m; no bounds, any length.
 collectionBounds : '[' INTEGER (',' (INTEGER | '*')?)? ']' ;
 shapeOrRef      : shapeDefinition

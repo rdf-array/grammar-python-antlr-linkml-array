@@ -160,7 +160,7 @@ class ShexShapeExpressionParser(ShExDocVisitor):
         self._shape_atom(ctx, True, False)
 
     # ------------------
-    # Collection (RDF-): ((shapeExpr))[min, max]
+    # Collection (rdf-array): ((shapeExpr))[min, max]
     # ------------------
     def _collection(self, ctx: ShExDocParser.ShapeAtomCollectionContext | ShExDocParser.InlineShapeAtomCollectionContext,
                     is_inline: bool) -> None:

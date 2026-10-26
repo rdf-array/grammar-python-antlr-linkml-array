@@ -1,9 +1,9 @@
 <img src=".github/rdf-array-logo.png" alt="[PyShExC]" width="96" align="right">
 
-# grammar-python-antlr-linkml-array: PyShExC for RDF-
+# grammar-python-antlr-linkml-array: PyShExC for rdf-array
 
 **RDF-** fork of [grammar-python-antlr-linkml](https://github.com/ericprud/grammar-python-antlr-linkml)
-(the `pyshexc` ShExC parser, from its `extends-shaperef` branch): ShEx-'s **Collection** shape
+(the `pyshexc` ShExC parser, from its `extends-shaperef` branch): ShEx-array's **Collection** shape
 expression `((shapeExpr))[min, max]` parses to a
 [ShExJSG-array](https://github.com/rdf-array/ShExJSG-array) `Collection` object and `pyshexc.ShExC`
 writes it back. The grammar now lives in this repository as `grammar/ShExDoc.g4` (the spec's
@@ -11,7 +11,7 @@ grammar plus `shapeAtomCollection`, `inlineShapeAtomCollection` and `collectionB
 always a Collection, `(x)` a parenthesised shape expression) and `scripts/genpython.sh` regenerates
 `pyshexc/parser/` from it with ANTLR 4.9.3, the version of the pinned Python runtime.
 [PyShEx-array](https://github.com/rdf-array/PyShEx-array) is the validator; its doc/rdf-array.md
-describes RDF- and lists the sibling forks.
+describes rdf-array and lists the sibling forks.
 
 ---
 

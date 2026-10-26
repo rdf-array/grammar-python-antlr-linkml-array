@@ -137,13 +137,13 @@ class ShExC:
         return self.binop(shapeAnd, 'AND')
 
     def shapeNot(self, shapeNot: ShExJ.ShapeNot) -> list[str]:
-        # RDF-: `((x))` is a Collection, so an AND/OR, which binop already parenthesises, is not wrapped again
+        # rdf-array: `((x))` is a Collection, so an AND/OR, which binop already parenthesises, is not wrapped again
         if isinstance(shapeNot.shapeExpr, (ShExJ.ShapeOr, ShExJ.ShapeAnd)):
             return [self.shapeExprLabel(shapeNot.id)] + ['NOT'] + self.shapeExpr(shapeNot.shapeExpr)
         return [self.shapeExprLabel(shapeNot.id)] + ['NOT ('] + self.shapeExpr(shapeNot.shapeExpr) + [')']
 
     def collection(self, coll: ShExJ.Collection) -> list[str]:
-        """ RDF-: ((shapeExpr))[min, max] """
+        """ rdf-array: ((shapeExpr))[min, max] """
         return [self.shapeExprLabel(coll.id)] + ['(('] + self.shapeExpr(coll.shapeExpr) + ['))' + collection_bounds(coll)]
 
     def nodeConstraint(self, nc: ShExJ.NodeConstraint) -> list[str]:
@@ -375,7 +375,7 @@ class ShExC:
 
 
 def collection_bounds(coll: ShExJ.Collection) -> str:
-    """ RDF-: the [min, max] of a Collection as written: [m] exactly m, [m, *] at least m, nothing for any length """
+    """ rdf-array: the [min, max] of a Collection as written: [m] exactly m, [m, *] at least m, nothing for any length """
     if coll.min is None and coll.max is None:
         return ''
     mn = coll.min if coll.min is not None else 0

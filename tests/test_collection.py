@@ -1,4 +1,4 @@
-""" RDF-: the Collection shape expression, ((shapeExpr))[min, max].
+""" rdf-array: the Collection shape expression, ((shapeExpr))[min, max].
 
 A sequence term `(1 2 3)` is one RDF node; a Collection says how many elements it has and what each
 must conform to.  `[m]` is exactly m elements, `[m, n]` from m to n, `[m, *]` or `[m,]` at least m,
